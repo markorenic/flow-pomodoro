@@ -126,6 +126,8 @@ class SessionConfirm extends WatchUi.ConfirmationDelegate {
         if (yes) {
             if (action == :skip) { app.session.skip(); } else { app.session.reset(); }
             app.save();
+            WatchUi.popView(WatchUi.SLIDE_DOWN);
+            WatchUi.requestUpdate();
         }
         return true;
     }

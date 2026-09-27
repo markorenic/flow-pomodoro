@@ -4,6 +4,7 @@ class Session {
     var durations as Lang.Array<Lang.Number> = [25 * 60, 5 * 60, 15 * 60];
     var phase = 0;
     var completed = 0;
+    var progress = 0;
     var remaining = 25 * 60;
     var total = 25 * 60;
     var running = false;
@@ -46,6 +47,7 @@ class Session {
         if (!running || left(now) > 0) { return false; }
         if (phase == 0) {
             completed += 1;
+            progress += 1;
             prepare(completed % 4 == 0 ? 2 : 1);
         } else {
             prepare(0);
@@ -55,6 +57,7 @@ class Session {
 
     function skip() {
         // Skipping focus does not earn a completed block.
+        if (phase == 0) { progress += 1; }
         prepare(phase == 0 ? 1 : 0);
     }
 
@@ -68,7 +71,7 @@ class Session {
     function snapshot(now) {
         return {
             "durations" => durations, "phase" => phase,
-            "completed" => completed, "remaining" => left(now),
+            "completed" => completed, "progress" => progress, "remaining" => left(now),
             "total" => total, "started" => started, "haptics" => haptics
         };
     }
@@ -94,6 +97,8 @@ class Session {
         total = t;
         remaining = r;
         completed = c;
+        var savedProgress = data["progress"];
+        progress = savedProgress instanceof Lang.Number && savedProgress >= completed ? savedProgress : completed;
         started = data["started"] == true;
         haptics = data["haptics"] != false;
         running = false;

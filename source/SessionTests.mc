@@ -35,9 +35,14 @@ function skipDoesNotEarnBlock(logger) {
     s.toggle(10);
     s.skip();
     Test.assertEqual(s.completed, 0);
+    Test.assertEqual(s.progress, 1);
     Test.assertEqual(s.phase, 1);
     s.skip();
     Test.assertEqual(s.phase, 0);
+    Test.assertEqual(s.progress, 1);
+    var restored = new Session();
+    restored.restore(s.snapshot(20));
+    Test.assertEqual(restored.progress, 1);
     return true;
 }
 

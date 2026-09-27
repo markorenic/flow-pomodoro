@@ -44,7 +44,7 @@ class FlowView extends WatchUi.View {
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_BLACK);
         text(dc, 216, Graphics.FONT_XTINY, model.running ? "" : (model.started ? "PAUSED" : "READY"));
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
-        var done = model.completed % 4;
+        var done = model.progress % 4;
         if (model.phase == 2) { done = 4; }
         for (var j = 0; j < 4; j += 1) {
             var x = 113 + j * 18;
