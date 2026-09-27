@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="3">
+    <iq:application id="49a1af04b730497aa2f1d9d28693c37b" type="watch-app" name="@Strings.AppName" entry="FlowApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.3.0">
+        <iq:products><iq:product id="fenix7x"/></iq:products>
+        <iq:permissions/>
+        <iq:languages><iq:language>eng</iq:language></iq:languages>
+        <iq:barrels/>
+    </iq:application>
+</iq:manifest>
